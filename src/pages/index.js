@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { encode, decode } from 'gpt-tokenizer/model/gpt-3.5-turbo';
+import { encode, decode } from "gpt-tokenizer/model/gpt-3.5-turbo";
 import Layout from "@/components/Layout";
 
 const MODEL_COST_PER_1K_TOKENS = {
@@ -12,11 +12,11 @@ const MODEL_COST_PER_1K_TOKENS = {
   "gpt-3.5-turbo-completion": 0.002,
   "gpt-3.5-turbo-16k-completion": 0.004,
   "text-ada-001": 0.0004,
-  "ada": 0.0004,
+  ada: 0.0004,
   "text-babbage-001": 0.0005,
-  "babbage": 0.0005,
+  babbage: 0.0005,
   "text-curie-001": 0.002,
-  "curie": 0.002,
+  curie: 0.002,
   "text-davinci-003": 0.02,
   "text-davinci-002": 0.02,
   "code-davinci-002": 0.02,
@@ -50,7 +50,14 @@ const models = [
   "davinci-finetuned",
 ];
 
-const colors = ['bg-blue-200', 'bg-red-200', 'bg-green-200', 'bg-yellow-200', 'bg-purple-200', 'bg-pink-200'];
+const colors = [
+  "bg-blue-200",
+  "bg-red-200",
+  "bg-green-200",
+  "bg-yellow-200",
+  "bg-purple-200",
+  "bg-pink-200",
+];
 
 const TokenizerPage = () => {
   const exampleText = `Some words become one token, but others, like "indivisible", don't. \nEmojis like 🤚🏾 can turn into many tokens. \n\nCharacters often seen together, like "1234567890", may become one token.`;
@@ -66,17 +73,37 @@ const TokenizerPage = () => {
     setInputText(exampleText);
   };
 
-  const decodedTokens = useMemo(() => Array.isArray(encodedTokens) ? encodedTokens.map(token => decode([token])) : [], [encodedTokens]);
-  const colorTokens = useMemo(() => decodedTokens.map((_, i) => colors[i % colors.length]), [decodedTokens]);
-  const cost = useMemo(() => (encodedTokens.length / 1000) * (MODEL_COST_PER_1K_TOKENS[selectedModel] || 0), [encodedTokens, selectedModel]);
+  const decodedTokens = useMemo(
+    () =>
+      Array.isArray(encodedTokens)
+        ? encodedTokens.map((token) => decode([token]))
+        : [],
+    [encodedTokens]
+  );
+  const colorTokens = useMemo(
+    () => decodedTokens.map((_, i) => colors[i % colors.length]),
+    [decodedTokens]
+  );
+  const cost = useMemo(
+    () =>
+      (encodedTokens.length / 1000) *
+      (MODEL_COST_PER_1K_TOKENS[selectedModel] || 0),
+    [encodedTokens, selectedModel]
+  );
 
   return (
     <>
       <Layout>
         <div className="mx-auto px-5 py-10 max-w-3xl">
           <h2 className="text-4xl font-bold mb-5">GPT Tokenizer</h2>
-          <h4 className="text-xl mb-5">Estimate GPT costs and token count from your text!</h4>
-          <p>Tokens are groups of characters often seen together. These models can predict what token comes next in a sequence, making them great at generating text.</p>
+          <h4 className="text-xl mb-5">
+            Estimate GPT costs and token count from your text!
+          </h4>
+          <p>
+            Tokens are groups of characters often seen together. These models
+            can predict what token comes next in a sequence, making them great
+            at generating text.
+          </p>
 
           <div className="my-5">
             <select
@@ -128,7 +155,6 @@ const TokenizerPage = () => {
             </div>
           </div>
 
-
           <div className="border-2 my-10 border-gray-200 bg-gray-200 rounded p-2 h-32 overflow-auto">
             {decodedTokens.map((token, i) => (
               <span
@@ -139,7 +165,7 @@ const TokenizerPage = () => {
               </span>
             ))}
           </div>
-        </div >
+        </div>
       </Layout>
     </>
   );

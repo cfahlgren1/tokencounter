@@ -94,7 +94,7 @@ const TokenizerPage = () => {
   return (
     <>
       <Layout
-        title="TokenCounter | Tokenize and estimate your LLM costs"
+        title="TokenCounter: tokenize and estimate your LLM costs"
         description="TokenCounter provides an easy-to-use interface to tokenize your text and estimate your Large Language Model (LLM) costs. Understand how GPT models process your text into tokens and improve your usage efficiency."
         url="https://www.tokencounter.io"
         imageUrl="/ogg.png"

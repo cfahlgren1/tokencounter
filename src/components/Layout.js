@@ -22,6 +22,9 @@ const Layout = ({ children, title, description, url, imageUrl }) => {
           siteName: "TokenCounter",
         }}
         twitter={{
+          title: title,
+          description: description,
+          imageUrl: imageUrl,
           handle: "@thecalebf",
           site: "@site",
           cardType: "summary_large_image",
